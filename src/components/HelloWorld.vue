@@ -45,8 +45,8 @@ export default {
   async mounted(){
     try {
     const host = 'https://raw.githubusercontent.com/zaidibnu/zaidflix/master/hosted/dataserver.js';
-    const result = await import(host);
-    this.NewMessage = result;
+    const result = await fetch(host);
+    this.NewMessage = await result.json();
   } catch (error) {
     this.NewMessage = error;
   }

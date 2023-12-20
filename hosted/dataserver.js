@@ -1,3 +1,5 @@
-module.exports =  {
-    imageServer:"http://andromeda.s-net.id:5489/img/",
-}
+{
+    "apiUrl": "https://api.example.com",
+    "apiKey": "your-api-key"
+  }
+  
