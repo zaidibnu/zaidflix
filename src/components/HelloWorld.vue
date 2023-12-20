@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <p>{{ NewMessage }}</p>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
@@ -34,8 +35,18 @@
 export default {
   name: 'HelloWorld',
   props: {
-    msg: String
+    msg:String,
+  },
+  data(){
+    return {
+      NewMessage:''
+    }
+  },
+  mounted(){
+  const host = 'https://raw.githubusercontent.com/zaidibnu/zaidflix/master/hosted/dataserver.js'
+  import(host).then(result=> this.NewMessage = result)
   }
+  
 }
 </script>
 
