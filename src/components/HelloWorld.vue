@@ -42,9 +42,14 @@ export default {
       NewMessage:''
     }
   },
-  mounted(){
-  const host = 'https://raw.githubusercontent.com/zaidibnu/zaidflix/master/hosted/dataserver.js'
-  import(host).then(result=> this.NewMessage = result)
+  async mounted(){
+    try {
+    const host = 'https://raw.githubusercontent.com/zaidibnu/zaidflix/master/hosted/dataserver.js';
+    const result = await import(host);
+    this.NewMessage = result;
+  } catch (error) {
+    this.NewMessage = error;
+  }
   }
   
 }
