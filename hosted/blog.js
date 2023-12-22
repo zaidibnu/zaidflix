@@ -1,4 +1,4 @@
-export default {
+module.exports=  {
   data: [
     "1. Mendalam pada Desain Algoritma Tingkat Lanjut",
     "2. Optimasi Kode: Teknik dan Strategi Terbaik",
