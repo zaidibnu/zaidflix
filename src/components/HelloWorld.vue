@@ -1,37 +1,68 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>{{ NewMessage }}</p>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+  <SidePanel ref="SidePanel" :attr="sidePanelAttr"></SidePanel>
+  <LayoutA :attr="{navbg:'bg-black'}">
+      <template v-slot:navbar>
+        <div class="col-6">
+          <div class="text-start p-3">
+            {{msg}}
+          </div>
+      </div>
+      <div class="col-6">
+          <div class="text-end w-100">
+            <a class="bx bx-icon bxs-cog btnTB"></a>
+            <a class="bx bx-icon bxs-grid btnTB" @click="this.openSidePanel()"></a>
+          </div>
+      </div>
+      </template>
+      <template v-slot:topContent>
+        <div class="w-100 d-flex justify-content-center">
+          <div class="myAvatar circle"></div> 
+        </div>
+        <div class="w-100 text-center">
+          <div class="myName">Zaid Ibnu Awwal</div> 
+        </div>
+      </template>
+      <template v-slot:bottomContent>
+        <div  class="w-100 p-2">
+        <div class="w-100" style="text-align: justify;">
+          <div class="card-footer">
+            <div class="row g-1">
+              <div class="col-2">
+                <router-link to="/about">
+                  <div class="btn btn-sm btn-outline-success w-100">
+                  <i class="bx bx-icon bx-user-circle"></i>
+                  About
+                </div>
+                </router-link>
+              </div>
+              <div class="col-2">
+                <router-link to="/contact">
+                <div class="btn btn-sm btn-outline-primary w-100">
+                  <i class="bx bx-icon bx-envelope"></i>
+                  Contact
+                </div>
+                </router-link>
+              </div>
+              <div class="col-2">
+                <div class="btn btn-sm btn-outline-primary w-100">
+                  <i class="bx bx-icon bx-note"></i>
+                  Blogs
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
   </div>
+      </template>
+  </LayoutA>
+
 </template>
 
 <script>
+import {ref} from 'vue'
+import LayoutA from '../layouts/layoutA'
+import SidePanel from '@/components/SidePanel/SidePanel.vue'
+import xcom from '@/assets/components'
 export default {
   name: 'HelloWorld',
   props: {
@@ -39,24 +70,36 @@ export default {
   },
   data(){
     return {
-      NewMessage:''
+      NewMessage:'',
+      component_oc:null,
+      sidePanelOpen:false,
+      sidePanelAttr:{
+        list:xcom
+      },
+      xwidth:ref(screen.width),
+      xheight:ref(screen.height),
     }
   },
   async mounted(){
     try {
-    const host = 'https://raw.githubusercontent.com/zaidibnu/zaidflix/master/hosted/dataserver.js';
+    const host = 'https://raw.githubusercontent.com/zaidibnu/zaidflix/master/hosted/dataserver.js?key=1';
     const result = await fetch(host);
     this.NewMessage = await result.json();
   } catch (error) {
     this.NewMessage = error;
   }
-  }
-  
+  },
+  methods:{
+    openSidePanel(){
+      this.$refs.SidePanel.togglePanel();
+    }
+  },
+  components:{LayoutA,SidePanel}
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
 h3 {
   margin: 40px 0 0;
 }
@@ -70,5 +113,44 @@ li {
 }
 a {
   color: #42b983;
+}
+.circle{
+  border-radius: 50%;
+}
+.myAvatar{
+  height: 164px;
+  width:164px;
+  background: url('https://zaidflix.web.app/profile.jpg');
+  background-position: center;
+  background-size: cover;
+  border:5px solid white;
+  box-shadow: 1px 1px 13px 1px rgba(0,0,0,0.3);
+}
+.myName{
+  color:#12e859;
+  font-size: 48 px;
+  font-weight: 700;
+  word-spacing: 2pt;
+  margin: 3px;
+  &:hover{
+    color:white;
+    text-shadow: 1px 1px 1px 3 rgb(9, 243, 9);
+    cursor: pointer;
+    transition-property: color;
+    transition-duration: 0.9s;
+  }
+}
+.lt{
+  background: rgba(255,255,255,0.1);
+  min-height: 10vh;
+  padding:2vh;
+  border-radius: 8px;
+  backdrop-filter: blur(3px);
+  &:hover{
+    transition-property: background;
+    background:black;
+    box-shadow: 0px 0px 4px 1px white;
+    transition-duration: 1s;
+  }
 }
 </style>
