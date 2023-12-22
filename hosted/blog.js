@@ -1,4 +1,5 @@
-export default  [
+export default {
+  data: [
     "1. Mendalam pada Desain Algoritma Tingkat Lanjut",
     "2. Optimasi Kode: Teknik dan Strategi Terbaik",
     "3. Profiling dan Tuning Performa Aplikasi",
@@ -49,4 +50,5 @@ export default  [
     "48. Membangun Sistem Terdistribusi yang Scalable",
     "49. Kriptografi Modern dalam Aplikasi Keamanan",
     "50. Pemrograman Berbasis Layanan dengan Spring Cloud",
-  ];
+  ]
+};

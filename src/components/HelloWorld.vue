@@ -44,10 +44,12 @@
                 </router-link>
               </div>
               <div class="col-2">
+                <router-link to="/blog">
                 <div class="btn btn-sm btn-outline-primary w-100">
                   <i class="bx bx-icon bx-note"></i>
                   Blogs
                 </div>
+                </router-link>
               </div>
             </div>
           </div>
