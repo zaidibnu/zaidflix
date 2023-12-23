@@ -49,7 +49,5 @@ export default  [
     { id: 48, title: "Pengenalan ke Ethereum dan Smart Contracts", date: "2023-01-20" },
     { id: 49, title: "Tips Efektif dalam Pengembangan Front-end", date: "2023-01-17" },
     { id: 50, title: "Memahami Prinsip-prinsip Agile Development", date: "2023-01-09" },
-  ];
-  
-  console.log(judulBlog);
+  ]
   

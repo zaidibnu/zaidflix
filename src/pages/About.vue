@@ -5,9 +5,9 @@
              <div class="myAvatar circle"></div>  
         </div>
         <div class="w-100 d-flex justify-content-center p-2">
-            <div>
-                <router-link to="/"  class="btn btn-light">Back</router-link>  
-            </div>
+                <div>
+                    <router-link to="/"  class="btn btn-light">Back</router-link>  
+                </div>
         </div>
     </template>
     <template v-slot:bPos>

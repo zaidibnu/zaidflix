@@ -4,26 +4,49 @@
  width:80vw;
  border-radius: 8px;
  margin-top: 2vh;
- height: 90vh;
+ height: 99vh;
  max-height: 90vh;
  background:rgba(0,0,0,0.5); 
  backdrop-filter: blur('5px'); overflow-y: hidden;">
-    <router-link to="/">Back</router-link>
+    <div class="w-100 row">
+        <div class="col-12 d-flex" >
+            <router-link to="/" class="bx bx-icon bxs-left-arrow-circle btnTB " style="margin-left: 8px;" />
+            <router-link to="/" class="bx bx-icon bxs-home btnTB " style="margin-left: 8px;" />
+            <input class="form-control m-2 w-50" style="font-size:12px;">
+        </div>
+    </div>
     <div class="g-2 row thinScroll m-3" style="min-height: 30vh;
     max-height: 100%;
-    overflow-y: scroll;">
+    overflow-y: scroll;
+    padding-bottom: 10vh;
+    " v-if="notContent">
         <div class="col-3" v-for="(item,index) in items" v-bind:key="index">
-            <div class="card "  style="min-height: 10vh;">
-                <div class="card-body">
+            <div class="card citem "  style="min-height: 3vh;">
+                <div class="card-body" style="font-size: 12px;">
                     {{ item.date }}
                 </div>
                 <div class="card-footer bTitle" :title="item.title"
-                @click="open(item.id)"
+                @click="open(index)"
                 > 
                     {{ item.title }}
                 </div>
             </div>
         </div>
+    </div>
+    <div class="g-2 row thinScroll m-3" style="min-height: 80%;
+    max-height: 90%;
+    overflow-y: scroll;
+    padding-bottom: 10vh;
+    background: rgba(255,255,255,0.8);
+    color:black;
+    " v-if="!notContent">
+        <div class="m2 p2 text-start">
+            <h2>{{ items[current].title }}</h2>
+        </div>
+        <div v-html="content"></div>
+        <p
+        style="margin: 0;"
+        class="text-start p-3 g-0" v-for="i in 20" v-bind:key="i"> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
     </div>
  </div>
         <video autoplay muted loop style="width: 100vw; height: 100vh; margin-top: 0vh; object-fit: cover; position: fixed;top:0; left: 0;
@@ -38,7 +61,9 @@ export default {
   data() {
     return {
       items: [],
-      blogUrl: './blog.js'
+      current:0,
+      blogUrl: './blog.js',
+      notContent:true,
     };
   },
   mounted() {
@@ -53,9 +78,13 @@ export default {
   },
   methods:{
     open(id){
-        console.log(id)
+        this.current = id;
         fetch('https://raw.githubusercontent.com/zaidibnu/zaidflix/master/hosted/1.html').then((result)=>{
-            result.text().then(console.log)
+            result.text().then((ctn)=>{
+                this.content =ctn;
+                        this.notContent = false 
+                        console.log(id)
+            })
         })
     }
   }
@@ -74,5 +103,13 @@ export default {
     font-weight: 700;
   }
     
+}
+.citem{
+    &:hover{
+        opacity: .7;
+        cursor: pointer;
+        transition-property: opacity;
+        transition-duration: .8s;
+    }
 }
 </style>
