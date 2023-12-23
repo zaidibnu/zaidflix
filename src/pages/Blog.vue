@@ -40,10 +40,17 @@
     background: rgba(255,255,255,0.8);
     color:black;
     " v-if="!notContent">
-        <div class="m2 p2 text-start">
+        <div class="m-2 p-2 text-start">
             <h2>{{ items[current].title }}</h2>
         </div>
-        <div v-html="content"></div>
+        <div class="row">
+            <div class="col-6">
+                <div class="text-start text-sm">
+                    <i class="bx bx-icon bx-calendar"></i> {{ items[current].date }}
+                </div>
+            </div>
+        </div>
+        <div v-html="content" class="p-3"></div>
     </div>
  </div>
         <video autoplay muted loop style="width: 100vw; height: 100vh; margin-top: 0vh; object-fit: cover; position: fixed;top:0; left: 0;
