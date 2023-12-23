@@ -14,7 +14,9 @@
     overflow-y: scroll;">
         <div class="col-3" v-for="(item,index) in items" v-bind:key="index">
             <div class="card "  style="min-height: 10vh;">
-                <div class="card-body"></div>
+                <div class="card-body">
+                    {{ item.date }}
+                </div>
                 <div class="card-footer bTitle" :title="item.title"
                 @click="open(item.id)"
                 > 
@@ -51,7 +53,10 @@ export default {
   },
   methods:{
     open(id){
-        alert(id)
+        console.log(id)
+        fetch('https://raw.githubusercontent.com/zaidibnu/zaidflix/master/hosted/1.html').then((result)=>{
+            result.text().then(console.log)
+        })
     }
   }
 };
